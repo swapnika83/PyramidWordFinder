@@ -1,0 +1,37 @@
+﻿
+@{
+    ViewData["Title"] = "PyramidWordFinder";
+}
+
+<h1>Pyramid Word Finder</h1>
+
+<label>Enter a word</label>
+<br />
+
+@Html.TextBox("WordToCheck", null, new { @class = "form-control", @id = "strWord" })
+
+<br />
+
+<input id="submit" type="button" onclick="CheckForPyramid()" title="Check Word" value="Check Word" />
+<br />
+<p id="SaveMessage" style="color:blue"></p>
+
+
+<script type="text/javascript">
+
+    function CheckForPyramid() {
+
+        $.ajax({
+            url: 'PyramidWordFinder?strWord=' + $('#strWord').val(),
+            cache: false,
+            type: "POST",
+            dataType: this.dataType,
+            contentType: "application/json; charset=utf-8",
+            success: function (msg) {
+                alert(msg);
+                $("#SaveMessage").replaceWith(msg);
+            }
+        }); 
+    }
+
+</script>
